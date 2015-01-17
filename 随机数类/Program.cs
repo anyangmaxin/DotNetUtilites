@@ -11,5 +11,5 @@ namespace 随机数类
         static void Main(string[] args)
         {
         }
-    }
+    }   
 }
