@@ -5,6 +5,17 @@ VisualStudioVersion = 12.0.31101.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "随机数类", "随机数类\随机数类.csproj", "{CD4F2021-8175-4CB7-9983-70E75C2C247C}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DLL", "DLL", "{1629DB17-91B4-4FE9-B2A4-B445DD0C88BA}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\COM.Excel.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\COM.Excel.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Excel.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Excel.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\ICSharpCode.SharpZipLib.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\ICSharpCode.SharpZipLib.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\itextsharp.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\itextsharp.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Microsoft.Office.Interop.Owc11.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Microsoft.Office.Interop.Owc11.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Microsoft.Web.UI.WebControls.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\Microsoft.Web.UI.WebControls.dll
+		..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\OWC10Chart.dll = ..\..\开源项目\c#+多年积累的类库\DotNet.Utilities\DLL\OWC10Chart.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
