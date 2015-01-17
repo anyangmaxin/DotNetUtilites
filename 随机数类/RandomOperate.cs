@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNet.Utilities
+namespace 随机数类
 {
     public class RandomOperate
     {

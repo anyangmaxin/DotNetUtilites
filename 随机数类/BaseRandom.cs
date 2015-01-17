@@ -4,7 +4,7 @@
 
 using System;
 
-namespace DotNet.Utilities
+namespace 随机数类
 {
 	/// <summary>
     /// BaseRandom
@@ -14,9 +14,9 @@ namespace DotNet.Utilities
 	/// </summary>
 	public class BaseRandom
 	{
-		public static int Minimum = 100000;
-        public static int Maximal = 999999;
-        public static int RandomLength = 6;
+	    private static int Minimum = 100000;
+	    private static int Maximal = 999999;
+	    private static int RandomLength = 6;
 
         private static string RandomString = "0123456789ABCDEFGHIJKMLNOPQRSTUVWXYZ";
         private static Random Random = new Random(DateTime.Now.Second);

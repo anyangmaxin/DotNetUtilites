@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DotNet.Utilities
+namespace 随机数类
 {
     /// <summary>
     /// 使用Random类生成伪随机数
@@ -17,7 +17,7 @@ namespace DotNet.Utilities
         public RandomHelper()
         {
             //为随机数对象赋值
-            this._random = new Random();
+            _random = new Random();
         }
         #endregion
 
@@ -29,7 +29,7 @@ namespace DotNet.Utilities
         /// <param name="maxNum">最大值</param>
         public int GetRandomInt(int minNum, int maxNum)
         {
-            return this._random.Next(minNum, maxNum);
+            return _random.Next(minNum, maxNum);
         }
         #endregion
 
@@ -39,7 +39,7 @@ namespace DotNet.Utilities
         /// </summary>
         public double GetRandomDouble()
         {
-            return this._random.NextDouble();
+            return _random.NextDouble();
         }
         #endregion
 

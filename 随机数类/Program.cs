@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace 随机数类
 {
@@ -10,6 +6,10 @@ namespace 随机数类
     {
         static void Main(string[] args)
         {
+
+            Console.WriteLine("生产随机字符串："+BaseRandom.GetRandomString());
+            Console.WriteLine("随机数：" + BaseRandom.GetRandom());
+            Console.ReadKey();
         }
     }   
 }
