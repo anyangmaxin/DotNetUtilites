@@ -10,7 +10,9 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    <input type="button" runat="server" OnServerClick="OnServerClick" value="测试" ID="btnTest"/>
+    <input type="button" runat="server" OnServerClick="OnServerClick" value="测试直接传入DataTable" ID="btnTest"/>
+        <input type="button" runat="server" OnServerClick="btnTest2_OnServerClick" value="测试直接传入DataTable以及标题数组" ID="btnTest2"/>
+        <input type="button" runat="server" OnServerClick="btnTest3_OnServerClick" value="测试直接传入DataTable以及标题数组以及字段名称数组" ID="btnTest3"/>
     </div>
     </form>
 </body>

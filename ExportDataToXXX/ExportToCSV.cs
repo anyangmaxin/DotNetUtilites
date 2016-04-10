@@ -3,40 +3,37 @@ using System.Data;
 using System.Data.Odbc;
 using System.IO;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Web;
 
 namespace ExportDataToXXX
 {
-  public  class ExportToCSV
+    public class ExportToCSV
     {
 
-         #region Fields
-        string _fileName;
+        #region Fields
         DataTable _dataSource;//数据源
         string[] _titles = null;//列标题
-        string[] _fields = null;//字段名
+        string[,] _fields = null;//字段名
         #endregion
+
         #region .ctor
-        /// <summary> 
-        /// 构造函数 
-        /// </summary> 
-        /// <param name="dataSource">数据源</param> 
-        public ExportToCSV()
-        {
-        }
+
         /// <summary> 
         /// 构造函数 
         /// </summary> 
         /// <param name="titles">要输出到 Excel 的列标题的数组</param> 
         /// <param name="fields">要输出到 Excel 的字段名称数组</param> 
         /// <param name="dataSource">数据源</param> 
-        public ExportToCSV(string[] titles, string[] fields, DataTable dataSource)
+        public ExportToCSV(string[] titles, string[,] fields, DataTable dataSource)
             : this(titles, dataSource)
         {
             if (fields == null || fields.Length == 0)
                 throw new ArgumentNullException("fields");
-            if (titles.Length != fields.Length)
-                throw new ArgumentException("titles.Length != fields.Length", "fields");
+
+            if (titles.Length != fields[0,0].Length)
+                throw new ArgumentException("titles.Length != fields.Length:"+titles.Length, "fields:"+fields.Length);
+
             _fields = fields;
         }
         /// <summary> 
@@ -44,11 +41,12 @@ namespace ExportDataToXXX
         /// </summary> 
         /// <param name="titles">要输出到 Excel 的列标题的数组</param> 
         /// <param name="dataSource">数据源</param> 
-        public ExportToCSV(string[] titles, DataTable dataSource)
+        public ExportToCSV( string[] titles, DataTable dataSource)
             : this(dataSource)
         {
             if (titles == null || titles.Length == 0)
                 throw new ArgumentNullException("titles");
+
             _titles = titles;
         }
         /// <summary> 
@@ -70,9 +68,13 @@ namespace ExportDataToXXX
         /// <summary>
         /// 导出到CSV文件并且提示下载
         /// </summary>
-        /// <param name="fileName"></param>
+        /// <param name="fileName">要生成的文件名</param>
         public void DataToCSV(string fileName)
         {
+            if (string.IsNullOrWhiteSpace(fileName))
+            {
+                fileName = DateTime.Now.ToString("yyyyMMdd");
+            }
             // 确保有一个合法的输出文件名 
             //if (fileName == null || fileName == string.Empty || !(fileName.ToLower().EndsWith(".csv")))
             // fileName = GetRandomFileName();
@@ -137,20 +139,21 @@ namespace ExportDataToXXX
         {
             if (_dataSource == null)
                 throw new ArgumentNullException("dataSource");
+
             StringBuilder strbData = new StringBuilder();
             if (_titles == null)
             {
                 //添加列名
                 foreach (DataColumn column in _dataSource.Columns)
                 {
-                    strbData.Append(column.ColumnName + ",");
+                    strbData.Append(DelQuota(column.ColumnName) + ",");
                 }
                 strbData.Append("\n");
                 foreach (DataRow dr in _dataSource.Rows)
                 {
                     for (int i = 0; i < _dataSource.Columns.Count; i++)
                     {
-                        strbData.Append(dr[i].ToString() + ",");
+                        strbData.Append(DelQuota(dr[i].ToString()) + ",");
                     }
                     strbData.Append("\n");
                 }
@@ -158,7 +161,7 @@ namespace ExportDataToXXX
             }
             foreach (string columnName in _titles)
             {
-                strbData.Append(columnName + ",");
+                strbData.Append(DelQuota(columnName) + ",");
             }
             strbData.Append("\n");
             if (_fields == null)
@@ -167,24 +170,33 @@ namespace ExportDataToXXX
                 {
                     for (int i = 0; i < _dataSource.Columns.Count; i++)
                     {
-                        strbData.Append(dr[i].ToString() + ",");
+                        strbData.Append(DelQuota(dr[i].ToString()) + ",");
                     }
                     strbData.Append("\n");
                 }
                 return strbData.ToString();
             }
-                
-            foreach (DataRow dr in _dataSource.Rows)
+
+            //foreach (DataRow dr in _dataSource.Rows)
+            //{
+            //    for (int i = 0; i < _fields.Length; i++)
+            //    {
+            //        strbData.Append(DelQuota(_fields[i].ToString()) + ",");
+            //    }
+            //    strbData.Append("\n");
+            //}
+
+            for (int i = 0; i < _dataSource.Rows.Count; i++)
             {
-                for (int i = 0; i < _fields.Length; i++)
+                for (int j = 0; j < _fields[i,0].Length; j++)
                 {
-                    strbData.Append(_fields[i].ToString() + ",");
+                    strbData.Append(DelQuota(_fields[i,j].ToString()) + ",");
                 }
-                strbData.Append("\n");
             }
             return strbData.ToString();
         }
         #endregion
+
         #region 得到一个随意的文件名
         /// <summary> 
         /// 得到一个随意的文件名 
@@ -195,6 +207,16 @@ namespace ExportDataToXXX
             Random rnd = new Random((int)(DateTime.Now.Ticks));
             string s = rnd.Next(Int32.MaxValue).ToString();
             return DateTime.Now.ToShortDateString() + "_" + s + ".csv";
+        }
+        #endregion
+
+        #region  转义英文逗号
+
+        private static string DelQuota(string str)
+        {
+            Regex reg = new Regex(@",");
+            string result = reg.Replace(str, "");
+            return result;
         }
         #endregion
 
