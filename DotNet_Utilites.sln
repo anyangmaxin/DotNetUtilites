@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "导出数据", "导出数�
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportDataToXXX", "ExportDataToXXX\ExportDataToXXX.csproj", "{65875BD4-6892-4DD6-B94B-E61D383AC997}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestExportData", "TestExportData\TestExportData.csproj", "{A7625E45-0AFD-418E-AA35-4D0B8AE709A1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -47,11 +49,16 @@ Global
 		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7625E45-0AFD-418E-AA35-4D0B8AE709A1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7625E45-0AFD-418E-AA35-4D0B8AE709A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7625E45-0AFD-418E-AA35-4D0B8AE709A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7625E45-0AFD-418E-AA35-4D0B8AE709A1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{65875BD4-6892-4DD6-B94B-E61D383AC997} = {677C35E5-6D22-4817-85EE-FE5A058FB80F}
+		{A7625E45-0AFD-418E-AA35-4D0B8AE709A1} = {677C35E5-6D22-4817-85EE-FE5A058FB80F}
 	EndGlobalSection
 EndGlobal
