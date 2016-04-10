@@ -10,7 +10,7 @@
 <body>
     <form id="form1" runat="server">
     <div>
-    
+    <input type="button" runat="server" OnServerClick="OnServerClick" value="测试" ID="btnTest"/>
     </div>
     </form>
 </body>

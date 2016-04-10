@@ -83,7 +83,7 @@ namespace ExportDataToXXX
             HttpContext.Current.Response.BufferOutput = true;
             HttpContext.Current.Response.Charset = "GB2312";
             HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
-            HttpContext.Current.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName, System.Text.Encoding.UTF8)));
+            HttpContext.Current.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName, Encoding.UTF8)));
             HttpContext.Current.Response.ContentType = "text/h323;charset=gbk";
             HttpContext.Current.Response.Write(data);
             HttpContext.Current.Response.End();
@@ -156,38 +156,33 @@ namespace ExportDataToXXX
                 }
                 return strbData.ToString();
             }
-            else
+            foreach (string columnName in _titles)
             {
-                foreach (string columnName in _titles)
+                strbData.Append(columnName + ",");
+            }
+            strbData.Append("\n");
+            if (_fields == null)
+            {
+                foreach (DataRow dr in _dataSource.Rows)
                 {
-                    strbData.Append(columnName + ",");
+                    for (int i = 0; i < _dataSource.Columns.Count; i++)
+                    {
+                        strbData.Append(dr[i].ToString() + ",");
+                    }
+                    strbData.Append("\n");
+                }
+                return strbData.ToString();
+            }
+                
+            foreach (DataRow dr in _dataSource.Rows)
+            {
+                for (int i = 0; i < _fields.Length; i++)
+                {
+                    strbData.Append(_fields[i].ToString() + ",");
                 }
                 strbData.Append("\n");
-                if (_fields == null)
-                {
-                    foreach (DataRow dr in _dataSource.Rows)
-                    {
-                        for (int i = 0; i < _dataSource.Columns.Count; i++)
-                        {
-                            strbData.Append(dr[i].ToString() + ",");
-                        }
-                        strbData.Append("\n");
-                    }
-                    return strbData.ToString();
-                }
-                else
-                {
-                    foreach (DataRow dr in _dataSource.Rows)
-                    {
-                        for (int i = 0; i < _fields.Length; i++)
-                        {
-                            strbData.Append(_fields[i].ToString() + ",");
-                        }
-                        strbData.Append("\n");
-                    }
-                    return strbData.ToString();
-                }
             }
+            return strbData.ToString();
         }
         #endregion
         #region 得到一个随意的文件名
