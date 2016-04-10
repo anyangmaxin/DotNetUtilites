@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.31101.0
+VisualStudioVersion = 12.0.40629.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "随机数类", "随机数类\随机数类.csproj", "{CD4F2021-8175-4CB7-9983-70E75C2C247C}"
 EndProject
@@ -12,6 +12,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Json", "Json\Json.csproj", "{48F6CEAE-0165-4CDB-82EB-BC29906C6A3F}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "永无BUG", "永无BUG\永无BUG.csproj", "{5DD0EBAE-17EE-4F16-823D-2BC2A475E72D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "导出数据", "导出数据", "{677C35E5-6D22-4817-85EE-FE5A058FB80F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ExportDataToXXX", "ExportDataToXXX\ExportDataToXXX.csproj", "{65875BD4-6892-4DD6-B94B-E61D383AC997}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,8 +43,15 @@ Global
 		{5DD0EBAE-17EE-4F16-823D-2BC2A475E72D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5DD0EBAE-17EE-4F16-823D-2BC2A475E72D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5DD0EBAE-17EE-4F16-823D-2BC2A475E72D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{65875BD4-6892-4DD6-B94B-E61D383AC997}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{65875BD4-6892-4DD6-B94B-E61D383AC997} = {677C35E5-6D22-4817-85EE-FE5A058FB80F}
 	EndGlobalSection
 EndGlobal
