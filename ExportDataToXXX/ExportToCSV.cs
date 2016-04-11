@@ -15,6 +15,7 @@ namespace ExportDataToXXX
         DataTable _dataSource;//数据源
         string[] _titles = null;//列标题
         string[,] _fields = null;//字段名
+        private HttpContext _httpContext;
         #endregion
 
         #region .ctor
@@ -25,8 +26,8 @@ namespace ExportDataToXXX
         /// <param name="titles">要输出到 Excel 的列标题的数组</param> 
         /// <param name="fields">要输出到 Excel 的字段名称数组</param> 
         /// <param name="dataSource">数据源</param> 
-        public ExportToCSV(string[] titles, string[,] fields, DataTable dataSource)
-            : this(titles, dataSource)
+        public ExportToCSV(string[] titles, string[,] fields, DataTable dataSource,HttpContext httpContext)
+            : this(titles, dataSource,httpContext)
         {
             if (fields == null || fields.Length == 0)
                 throw new ArgumentNullException("fields");
@@ -41,8 +42,8 @@ namespace ExportDataToXXX
         /// </summary> 
         /// <param name="titles">要输出到 Excel 的列标题的数组</param> 
         /// <param name="dataSource">数据源</param> 
-        public ExportToCSV( string[] titles, DataTable dataSource)
-            : this(dataSource)
+        public ExportToCSV( string[] titles, DataTable dataSource,HttpContext httpContext)
+            : this(dataSource,httpContext)
         {
             if (titles == null || titles.Length == 0)
                 throw new ArgumentNullException("titles");
@@ -53,13 +54,15 @@ namespace ExportDataToXXX
         /// 构造函数 
         /// </summary> 
         /// <param name="dataSource">数据源</param> 
-        public ExportToCSV(DataTable dataSource)
+        public ExportToCSV(DataTable dataSource,HttpContext httpContext)
         {
             if (dataSource == null)
                 throw new ArgumentNullException("dataSource");
             // maybe more checks needed here (IEnumerable, IList, IListSource, ) ??? 
             // 很难判断，先简单的使用 DataTable 
             _dataSource = dataSource;
+
+            _httpContext = httpContext;
         }
         #endregion
 
@@ -79,16 +82,29 @@ namespace ExportDataToXXX
             //if (fileName == null || fileName == string.Empty || !(fileName.ToLower().EndsWith(".csv")))
             // fileName = GetRandomFileName();
             string data = ExportCSV();
-            HttpContext.Current.Response.ClearHeaders();
-            HttpContext.Current.Response.Clear();
-            HttpContext.Current.Response.Expires = 0;
-            HttpContext.Current.Response.BufferOutput = true;
-            HttpContext.Current.Response.Charset = "GB2312";
-            HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
-            HttpContext.Current.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName, Encoding.UTF8)));
-            HttpContext.Current.Response.ContentType = "text/h323;charset=gbk";
-            HttpContext.Current.Response.Write(data);
-            HttpContext.Current.Response.End();
+          
+            _httpContext.Response.ClearHeaders();
+            _httpContext.Response.Clear();
+            _httpContext.Response.Expires = 0;
+            _httpContext.Response.BufferOutput = true;
+            _httpContext.Response.Charset = "GB2312";
+            _httpContext.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+            _httpContext.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName, Encoding.UTF8)));
+            _httpContext.Response.ContentType = "text/h323;charset=gbk";
+            _httpContext.Response.Write(data);
+            _httpContext.Response.End();
+
+
+            //HttpContext.Current.Response.ClearHeaders();
+            //HttpContext.Current.Response.Clear();
+            //HttpContext.Current.Response.Expires = 0;
+            //HttpContext.Current.Response.BufferOutput = true;
+            //HttpContext.Current.Response.Charset = "GB2312";
+            //HttpContext.Current.Response.ContentEncoding = System.Text.Encoding.GetEncoding("GB2312");
+            //HttpContext.Current.Response.AppendHeader("Content-Disposition", string.Format("attachment;filename={0}.csv", HttpUtility.UrlEncode(fileName, Encoding.UTF8)));
+            //HttpContext.Current.Response.ContentType = "text/h323;charset=gbk";
+            //HttpContext.Current.Response.Write(data);
+            //HttpContext.Current.Response.End();
         }
         #endregion
         /// <summary>

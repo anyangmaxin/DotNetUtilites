@@ -6,6 +6,7 @@ namespace TestExportData
 {
     public partial class CSV : System.Web.UI.Page
     {
+        public string jsmsg = "";
         protected void Page_Load(object sender, EventArgs e)
         {
 
@@ -26,8 +27,10 @@ namespace TestExportData
                 newRow["中,文，"] = "测试,，数据中文" + i;
                 dt.Rows.Add(newRow);
             }
-            ExportToCSV exportToCsv=new ExportToCSV(dt);
+            ExportToCSV exportToCsv=new ExportToCSV(dt,this.Context);
             exportToCsv.DataToCSV("测试只传入dt");
+            jsmsg = "alert('导出成功');";
+
         }
 
         protected void btnTest2_OnServerClick(object sender, EventArgs e)
@@ -45,7 +48,7 @@ namespace TestExportData
                 newRow[2] = "测试数据中文" + i;
                 dt.Rows.Add(newRow);
             }
-            ExportToCSV exportToCsv = new ExportToCSV(new[] { "第一列A", "第二列1", "第三列" }, dt);
+            ExportToCSV exportToCsv = new ExportToCSV(new[] { "第一列A", "第二列1", "第三列" }, dt,this.Context);
             exportToCsv.DataToCSV("测试传入标题数组以及dt");
         }
 
@@ -64,19 +67,14 @@ namespace TestExportData
                 newRow["中文"] = "测试数据中文" + i;
                 dt.Rows.Add(newRow);
             }
-            ExportToCSV exportToCsv = new ExportToCSV(new[] {"第一列A", "第二列1", "第三列"}, new[,]{
-            {"1第一个字段1", "1第二个字段A", "1第三个字段"}, 
-            {"2第一个字段1", "2第二个字段A", "2第三个字段"},
-                
-            {
-                "3第一个字段1",
-                "3第二个字段A",
-                "3第三个字段"
-            }
-        }
-    , dt);
-            exportToCsv.DataToCSV("测试传入标题数组以及dt以及字段名称数组");
+            //ExportToCSV exportToCsv = new ExportToCSV(new[] {"第一列A", "第二列1", "第三列"}, dt);
+            //exportToCsv.DataToCSV("测试传入标题数组以及dt以及字段名称数组");
             
+        }
+
+        protected void testBtnJS_OnClick(object sender, EventArgs e)
+        {
+            jsmsg = "alert('导出成功');";
         }
     }
 }
